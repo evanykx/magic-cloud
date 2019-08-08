@@ -1,0 +1,52 @@
+server:
+  port: 9900
+
+spring:
+#  jpa:
+#    # Automatically create tables
+#    show-sql: true
+#    generate-ddl: true
+#    hibernate:
+#      ddl-auto: update
+  # H2 data source settings
+  datasource:
+    platform: h2
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: org.h2.Driver
+    schema: classpath:/sql/schema.sql
+    data: classpath:/sql/data.sql
+    # Local file to save database
+    url: jdbc:h2:file:./src/main/resources/h2/dev-db;AUTO_SERVER=TRUE;DB_CLOSE_ON_EXIT=TRUE;
+    username: evan
+    password: 1234
+    continue-on-error: true
+
+  # H2 administer console
+  # Request by http://localhost:port/h2-console
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        web-allow-others: true
+
+mybatis:
+  mapper-locations: classpath:mapping/*Mapping.xml
+  type-aliases-package: cn.ice.lab.entity
+  type-handlers-package: cn.ice.lab.constant
+
+# Configure log
+logging:
+  path: logs
+  pattern:
+    file: '%d{yyyy-MMM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{15} - %msg%n'
+    console: '%d{yyyy-MMM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{15} - %msg%n'
+  level:
+    cn:
+      ice:
+        lab:
+          mapper: DEBUG
+    root: WARN
+    org.hibernate: WARN
+    org.springframework.security: DEBUG
+    org.springframework.web: DEBUG

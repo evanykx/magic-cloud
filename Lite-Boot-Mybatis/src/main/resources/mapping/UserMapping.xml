@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ice.lab.mapper.UserMapper">
+
+    <resultMap id="BaseResultMap" type="cn.ice.lab.entity.User">
+        <result column="id" javaType="java.lang.String" jdbcType="VARCHAR" property="id" />
+        <result column="username" javaType="java.lang.String" jdbcType="VARCHAR" property="username" />
+        <result column="password" javaType="java.lang.String" jdbcType="VARCHAR" property="password" />
+        <result column="age" javaType="java.lang.Integer" jdbcType="INTEGER" property="age" />
+        <result column="deleted" javaType="cn.ice.lab.constant.DeletedFlag" jdbcType="VARCHAR"
+                typeHandler="cn.ice.lab.constant.DeletedFlagEnumTypeHandler" property="deleted" />
+        <result column="creator" javaType="java.lang.String" jdbcType="VARCHAR" property="creator" />
+        <result column="created" javaType="java.sql.Date" jdbcType="DATE" property="created" />
+        <result column="updater" javaType="java.lang.String" jdbcType="VARCHAR" property="updater" />
+        <result column="updated" javaType="java.sql.Date" jdbcType="DATE" property="updated" />
+    </resultMap>
+
+    <select id="findOne" resultMap="BaseResultMap">
+        select * from T_USER where id = #{id}
+    </select>
+
+    <select id="findAll" resultMap="BaseResultMap">
+        select * from T_USER
+    </select>
+
+</mapper>
